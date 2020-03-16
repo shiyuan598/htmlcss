@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>弹性布局</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    .container{
+      border: rgb(206, 88, 143) 1px solid;
+      height: 600px;
+      display: flex;
+      /* 1.flex-direction项目的排列方向 默认为row*/
+      /* flex-direction: row; */
+      /* flex-direction: row-reverse; */
+      /* flex-direction: column; */
+      /* flex-direction: column-reverse; */
+      /* 2.flex-wrap属性决定如何换行 默认nowrap不换行 */
+      /* flex-wrap: nowrap; */
+      /* flex-wrap: wrap; */
+      /* flex-wrap: wrap-reverse; */
+      /* 3.flex-flow是1、2属性的合并 */
+      flex-flow: row wrap;
+      /* 4.justify-content属性，主轴上各项目如何排列 */
+      /* justify-content: center; */
+      /* justify-content: flex-start; */
+      /* justify-content: flex-end; */
+      /* justify-content: space-between; */
+      justify-content: space-around;
+      /* 4.align-content 主轴有多行时，行之间如何对齐 */
+      /* align-content: center; */
+      /* align-content: flex-start; */
+      /* align-content: flex-end; */
+      align-content: space-around;
+
+    }
+    .container div{
+      height: 200px;
+      width: 200px;
+      color: #87ceeb;
+      font-size: 100px;
+      text-align: center;
+      line-height: 200px;
+    }
+    .s1{
+      flex-grow: 2;
+      background: #000 url(./images/1.jpg) center center / cover no-repeat;
+    }
+    .s2{
+      background: #000 url(./images/2.jpg) center center / cover no-repeat;
+    }
+    .s3{
+      flex-shrink: 2;
+      background: #000 url(./images/3.jpg) center center / cover no-repeat;
+    }
+    .s4{
+      background: #000 url(./images/4.jpg) center center / cover no-repeat;
+    }
+    .s5{
+      background: #000 url(./images/5.jpg) center center / cover no-repeat;
+    }
+    .s6{
+      background: #000 url(./images/6.jpg) center center / cover no-repeat;
+    }
+    .s7{
+      background: #000 url(./images/7.jpg) center center / cover no-repeat;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="s1">1</div>
+    <div class="s2">2</div>
+    <div class="s3">3</div>
+    <div class="s4">4</div>
+    <div class="s5">5</div>
+    <div class="s6">6</div>
+    <div class="s7">7</div>
+  </div>
+</body>
+</html>
