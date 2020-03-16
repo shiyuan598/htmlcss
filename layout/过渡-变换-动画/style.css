@@ -1,0 +1,77 @@
+div {
+  color: #fff;
+  margin-top: 30px;
+}
+
+/* transition 通常配合hover使用，语法transition: 属性 时间 过渡曲线;
+也可以transition: all 时间 过渡曲线; 过渡曲线可省略
+hover时transition的属性有过渡效果，没有加过渡的其他一次性改变 */
+.box1 {
+  height: 100px;
+  width: 100px;
+  background-color: #ffc0cb;
+  /* transition: width 2s ease; */
+  /* transition: border 2s ease; */
+  /* transition: padding 2s ease; */
+  transition: all 2s ease;
+}
+
+.box1:hover {
+  padding: 10px;
+  border: 10px solid #333;
+  height: 80px;
+  width: 80px;
+  background-color: #87ceeb;
+}
+
+/* transfrom 2d 主要有三种变换 translate平移 rotate旋转 scale缩放
+transform-origin可以设置变换的中心点
+而且translate在以百分比%为单位时是相对于自身的，可以结合绝对定位实现居中top:50%; left:50%; transform: translate(50%, 50%);
+transfrom不会影响其他盒子 */
+.box2 {
+  width: 100px;
+  height: 100px;
+  background-color: #87ceeb;
+  /* transform: translate(50%, 50%); */
+  transform: rotate(45deg);
+  /* transform: scale(1.2); */
+}
+
+/* animation需要先定义关键帧动画，然后再通过动画名称调用，设置动画时长 */
+@keyframes run {
+  0% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translate(200px);
+  }
+}
+@keyframes bgc {
+  0% {
+  }
+  50% {
+    background-color: #FF4500;
+  }
+  100% {
+    background-color: #FFB90F;
+  }
+}
+@keyframes rotateAnimation {
+  0% {
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.box3 {
+  width: 100px;
+  height: 100px;
+  background-color: #90ee90;
+  animation-name: run, bgc;
+  animation-duration: 2s;
+}
+/* animation: rotateAnimation 2s infinite linear;
+rotateAnimation是定义的关键帧动画名称，2s一次动画的时候，infinite永久循环，linear线性变化 */
+.box3:hover {
+  animation: rotateAnimation .2s infinite linear;
+}
