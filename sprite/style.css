@@ -1,0 +1,90 @@
+* {
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+body{
+  /* background-color: #87ceeb; */
+}
+ul,
+li {
+  list-style: none;
+}
+/* 清除浮动 */
+.box1::after{
+  display: block;
+  clear: both;
+  content: "";
+  visibility: hidden;
+}
+.box1{
+  zoom: 1;
+}
+.box1 li {
+  float: left;
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+}
+.box1 li:nth-child(1) {
+  background: url(./images/map-icon.png) no-repeat 0 0;
+}
+.box1 li:nth-child(2) {
+  background: url(./images/map-icon.png) no-repeat -60px 0;
+}
+.box1 li:nth-child(3) {
+  background: url(./images/map-icon.png) no-repeat -90px 0;
+}
+.box1 li:nth-child(4) {
+  background: url(./images/map-icon.png) no-repeat -210px 0;
+}
+.box1 li:nth-child(5) {
+  background: url(./images/map-icon.png) no-repeat -240px 0;
+}
+.box1 li:nth-child(6) {
+  background: url(./images/map-icon.png) no-repeat -330px 0;
+}
+.box1 li:nth-child(7) {
+  background: url(./images/map-icon.png) no-repeat -360px 0;
+}
+.box1 li:nth-child(8) {
+  background: url(./images/map-icon.png) no-repeat -390px 0;
+}
+.box2 .text1{
+  margin: 10px;
+  height: 141px;
+  width: 410px;
+  background: url(./images/web-text.png) no-repeat -270px -538px;
+}
+.box2 .text2{
+  margin: 10px;
+  height: 109px;
+  width: 415px;
+  background: url(./images/web-text.png) no-repeat -26px -393px;
+}
+
+.box3 li:nth-child(1) {
+  height: 20px;
+  width: 16px;
+  background: url(./images/sprite-icons.png) no-repeat 0 0;
+}
+.box3 li:nth-child(2) {
+  height: 20px;
+  width: 16px;
+  background: url(./images/sprite-icons.png) no-repeat -22px 0;
+}
+.box3 li:nth-child(3) {
+  height: 24px;
+  width: 24px;
+  background: url(./images/sprite-icons.png) no-repeat -51px 0;
+}
+.box3 li:nth-child(4) {
+  height: 20px;
+  width: 20px;
+  background: url(./images/sprite-icons.png) no-repeat -23px -34px;
+}
+.box3 li:nth-child(5) {
+  height: 26px;
+  width: 20px;
+  background: url(./images/sprite-icons.png) no-repeat -53px -32px;
+}
