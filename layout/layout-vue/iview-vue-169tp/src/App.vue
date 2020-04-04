@@ -19,5 +19,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   /*margin-top: 60px;*/
+  filter: sepia(20%);
+  /* -webkit-filter: grayscale(1);
+  filter: grayscale(1); */
 }
 </style>
