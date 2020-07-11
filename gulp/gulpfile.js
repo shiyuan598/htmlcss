@@ -3,7 +3,7 @@ const gulp = require('gulp');
 // 0.任务前先清除目录
 const del = require('del');
 gulp.task('clean', function(cb){
-  return del (['./dist'], cb)
+  return del(['./dist'], cb)
 })
 
 // 注意：
@@ -12,7 +12,7 @@ gulp.task('clean', function(cb){
 
 // 1.html
 const htmlmin = require('gulp-htmlmin');
-gulp.task('html', ['clean'], function () {
+gulp.task('html', function () {
   return gulp
     .src('./index.html')
     .pipe(
@@ -22,43 +22,54 @@ gulp.task('html', ['clean'], function () {
       })
     )
     .pipe(gulp.dest('dist/'))
-    .pipe(connect.reload());
+    .pipe(livereload())
+    .pipe(connect.reload())
 });
 
 // 2.静态文件
-gulp.task('images', ['clean'], function () {
-  return gulp.src('img/**/*.*').pipe(gulp.dest('dist/images'));
+gulp.task('images', function () {
+  return gulp
+    .src('img/**/*.*')
+    .pipe(gulp.dest('dist/images'))
+    .pipe(livereload())
+    .pipe(connect.reload());
 });
 
 // 3.copy多个文件到一个目录
 // ! 可以排除一些文件
-gulp.task('data', ['clean'], function () {
+gulp.task('data', function () {
   return gulp
     .src(['json/*.json', 'xml/*.xml', '!xml/old.xml'])
-    .pipe(gulp.dest('dist/data/'));
+    .pipe(gulp.dest('dist/data/'))
+    .pipe(livereload())
+    .pipe(connect.reload());
 });
 
 // 4.添加插件  sass
 const sass = require('gulp-sass');
 sass.compiler = require('node-sass');
 
-gulp.task('sass', ['clean'], function () {
+gulp.task('sass', function () {
   return gulp
     .src('style/**/*.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('dist/css/'));
+    .pipe(gulp.dest('dist/css/'))
+    .pipe(livereload())
+    .pipe(connect.reload());
 });
 
 // 5.压缩css插件 及重命名
 var cssmin = require('gulp-cssmin');
 var rename = require('gulp-rename');
 
-gulp.task('cssmin', ['sass', 'clean'], function () {
+gulp.task('cssmin', ['sass'], function () {
   return gulp
     .src('./dist/css/*.css')
     .pipe(cssmin())
     .pipe(rename({ suffix: '.min' }))
-    .pipe(gulp.dest('dist/css/'));
+    .pipe(gulp.dest('dist/css/'))
+    .pipe(livereload())
+    .pipe(connect.reload());
 });
 
 // 6.处理js文件
@@ -66,20 +77,24 @@ gulp.task('cssmin', ['sass', 'clean'], function () {
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 
-gulp.task('js', ['clean'], function () {
+gulp.task('js', function () {
   return gulp
     .src('js/*.js')
     .pipe(concat('index.js'))
     .pipe(gulp.dest('dist/js/'))
     .pipe(uglify())
     .pipe(rename('index.min.js'))
-    .pipe(gulp.dest('dist/js/'));
+    .pipe(gulp.dest('dist/js/'))
+    .pipe(livereload())
+    .pipe(connect.reload());
 });
+
+
 
 // 7.inject 把压缩后的css和js注入到html中
 var inject = require('gulp-inject');
 gulp.task(
-  'inject', ['html', 'images', 'data', 'cssmin', 'js', 'clean'],
+  'inject', ['html', 'images', 'data', 'cssmin', 'js'],
   function () {
     return gulp
       .src('./dist/index.html') // 获取该文件的数据
@@ -94,7 +109,9 @@ gulp.task(
           }
         )
       )
-      .pipe(gulp.dest('./dist/'));
+      .pipe(gulp.dest('./dist/'))
+      .pipe(livereload())
+      .pipe(connect.reload());
   }
 )
 
@@ -103,6 +120,19 @@ gulp.task(
 //   < !--inject: css-- >
 //   <!-- endinject-->
 
+
+// default 默认任务
+gulp.task(
+  'default', ['inject'],
+  function () {
+    return gulp.src('./dist/**/*.*')
+  }
+)
+
+// default 默认任务
+gulp.task('build', ['default', 'clean'], function () {
+  console.info('build done!')
+});
 
 // 8.任务监听
 // 文件改变，会自动执行任务
@@ -116,24 +146,27 @@ gulp.task('watch', ['inject'], function () {
   gulp.watch('img/**/*', ['images']);
   gulp.watch(['json/*.json', 'xml/*.xml', '!xml/old.xml'], ['data']);
   gulp.watch('js/*.js', ['js'])
+  // 注意：需要在各个子任务中添加livereload配合
 })
 
 // 9.启动服务器
 const connect = require('gulp-connect');
-gulp.task('server', ['inject'], function () {
+const open = require('open');
+gulp.task('server', ['default'], function () {
   connect.server({
     root: 'dist/',
     port: 9001,
     livereload: true, // 实时刷新
-    open: true // 自动打开浏览器
-  })
-})
-
-const browserSync = require('browser-sync');
-gulp.task('browserSync', ['inject'], function () {
-  browserSync.init({
-    server: './',
-    port: 9002,
-    files: ['/dist/**/*.*'],
   });
+  // 注意：需要在各个子任务中添加connect配合
+
+  // 打开浏览器
+  open('http://localhost:9001/');
+
+  // 监听文件
+  gulp.watch('index.html', ['html']);
+  gulp.watch('style/**/*.scss', ['sass', 'cssmin']);
+  gulp.watch('img/**/*', ['images']);
+  gulp.watch(['json/*.json', 'xml/*.xml', '!xml/old.xml'], ['data']);
+  gulp.watch('js/*.js', ['js']);
 });
