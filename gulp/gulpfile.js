@@ -9,7 +9,7 @@ const gulp = require('gulp');
 
 // 编写任务，参数：名称，回调函数
 gulp.task('hello', function () {
-  console.info('Hello WOrld!')
+  console.info('Hello World!')
 })
 
 // gulp.src() // 找到资源文件
