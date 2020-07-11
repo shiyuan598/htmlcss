@@ -3,3 +3,6 @@ var user = {
   age: 29,
   gender: 'female'
 }
+function show(params) {
+  console.info(params)
+}
