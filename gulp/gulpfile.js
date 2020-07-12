@@ -14,7 +14,7 @@ gulp.task('clean', function(cb){
 const htmlmin = require('gulp-htmlmin');
 gulp.task('html', function () {
   return gulp
-    .src('./index.html')
+    .src('./src/index.html')
     .pipe(
       htmlmin({
         // collapseWhitespace: true, // 去掉空格
@@ -28,7 +28,7 @@ gulp.task('html', function () {
 // 2.静态文件
 gulp.task('images', function () {
   return gulp
-    .src('img/**/*.*')
+    .src('./srcimg/**/*.*')
     .pipe(gulp.dest('dist/images'))
     .pipe(connect.reload());
 });
@@ -37,7 +37,7 @@ gulp.task('images', function () {
 // ! 可以排除一些文件
 gulp.task('data', function () {
   return gulp
-    .src(['json/*.json', 'xml/*.xml', '!xml/old.xml'])
+    .src(['./src/json/*.json', './src/xml/*.xml', '!./src/xml/old.xml'])
     .pipe(gulp.dest('dist/data/'))
     .pipe(connect.reload());
 });
@@ -48,9 +48,9 @@ sass.compiler = require('node-sass');
 
 gulp.task('sass', function () {
   return gulp
-    .src('style/**/*.scss')
+    .src('./src/style/**/*.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('dist/css/'))
+    .pipe(gulp.dest('./src/css/'))
     .pipe(connect.reload());
 });
 
@@ -60,7 +60,8 @@ var rename = require('gulp-rename');
 
 gulp.task('cssmin', ['sass'], function () {
   return gulp
-    .src('./dist/css/*.css')
+    .src('./src/css/*.css')
+    .pipe(concat('index.css'))
     .pipe(cssmin())
     .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest('dist/css/'))
@@ -74,21 +75,19 @@ const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
 
 gulp.task('js', function () {
-  return (
-    gulp
-      .src('js/*.js')
-      .pipe(
-        babel({
-          presets: ['@babel/env']
-        })
-      )
-      .pipe(concat('index.js'))
-      .pipe(gulp.dest('dist/js/'))
-      // .pipe(uglify())
-      .pipe(rename('index.min.js'))
-      .pipe(gulp.dest('dist/js/'))
-      .pipe(connect.reload())
-  );
+  return gulp
+    .src('./src/scripts/*.js')
+    .pipe(concat('index.js'))
+    .pipe(
+      babel({
+        presets: ['@babel/env']
+      })
+    )
+    .pipe(gulp.dest('dist/js/'))
+    .pipe(uglify())
+    .pipe(rename('index.min.js'))
+    .pipe(gulp.dest('dist/js/'))
+    .pipe(connect.reload());
 });
 
 
@@ -151,9 +150,9 @@ gulp.task('server', ['default'], function () {
   open('http://localhost:9001/');
 
   // 监听文件
-  gulp.watch('index.html', ['html']);
-  gulp.watch('style/**/*.scss', ['sass', 'cssmin']);
-  gulp.watch('img/**/*', ['images']);
-  gulp.watch(['json/*.json', 'xml/*.xml', '!xml/old.xml'], ['data']);
-  gulp.watch('js/*.js', ['js']);
+  gulp.watch('./src/index.html', ['html']);
+  gulp.watch('./src/style/**/*.scss', ['sass', 'cssmin']);
+  gulp.watch('./src/img/**/*', ['images']);
+  gulp.watch(['./src/json/*.json', './src/xml/*.xml', '!./src/xml/old.xml'], ['data']);
+  gulp.watch('./src/scripts/*.js', ['js']);
 });
