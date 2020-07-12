@@ -15,7 +15,7 @@ const del = require('del');
 
 // 0.删除
 gulp.task('clean', function (cb) {
-  return del(['dist/*', '!dist/images'], cb);
+  return del(['dist/*', 'dist/images'], cb);
 });
 
 // 1.注册任务-js
@@ -81,26 +81,26 @@ gulp.task('image', function () {
 })
 
 // 6.inject 把压缩后的css和js注入到html中
-gulp.task('inject', gulp.series(['js', 'less', 'css', 'html', 'image'], function () {
-  return gulp
-    .src('./dist/index.html') // 获取该文件的数据
-    .pipe(
-      inject(
-        gulp.src(['./dist/js/build.min.js', './dist/css/style.min.css'], {
-          // 让获取的流被 inject 操作一次：把指定文件注入到流文件中
-          read: false, // 该参数默认为ture,此处fasle也就是并不会去读取文件
-        }),
-        {
-          relative: true, // Injecting files relative to target files
-        }
+gulp.task(
+  'inject',
+  gulp.series('clean', gulp.parallel(['js', gulp.series(['less', 'css']), 'html', 'image']), function () {
+    return gulp
+      .src('./dist/index.html') // 获取该文件的数据
+      .pipe(
+        inject(
+          gulp.src(['./dist/js/build.min.js', './dist/css/style.min.css'], {
+            // 让获取的流被 inject 操作一次：把指定文件注入到流文件中
+            read: false, // 该参数默认为ture,此处fasle也就是并不会去读取文件
+          }),
+          {
+            relative: true, // Injecting files relative to target files
+          }
+        )
       )
-    )
-    .pipe(gulp.dest('./dist/'))
-    .pipe(reload({ stream: true }));
-    }
-    
-  )
-)
+      .pipe(gulp.dest('./dist/'))
+      .pipe(reload({ stream: true }));
+  })
+);
 
 // 7.注册监听任务
 // 启动服务器
@@ -111,8 +111,10 @@ gulp.task('serve', gulp.series('inject', function () {
       baseDir: 'dist',
     },
   });
+  // 需要在子任务中添加reload来配合
 
-  gulp.watch('./src/js/**/*.js', gulp.series('js')); //监控文件变化，自动更新
+  //监控文件变化
+  gulp.watch('./src/js/**/*.js', gulp.series('js'));
   gulp.watch('./src/less/**/*.less', gulp.series('less'));
   gulp.watch('./src/css/**/*.css', gulp.series('css'));
   gulp.watch('./src/index.html', gulp.series('html'));
@@ -121,7 +123,7 @@ gulp.task('serve', gulp.series('inject', function () {
 
 
 // // 8.注册默认任务
-// gulp.task('default', ['server']);
+gulp.task('default', gulp.series(['serve']));
 
 
 
