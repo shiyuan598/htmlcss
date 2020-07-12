@@ -22,7 +22,6 @@ gulp.task('html', function () {
       })
     )
     .pipe(gulp.dest('dist/'))
-    .pipe(livereload())
     .pipe(connect.reload())
 });
 
@@ -31,7 +30,6 @@ gulp.task('images', function () {
   return gulp
     .src('img/**/*.*')
     .pipe(gulp.dest('dist/images'))
-    .pipe(livereload())
     .pipe(connect.reload());
 });
 
@@ -41,7 +39,6 @@ gulp.task('data', function () {
   return gulp
     .src(['json/*.json', 'xml/*.xml', '!xml/old.xml'])
     .pipe(gulp.dest('dist/data/'))
-    .pipe(livereload())
     .pipe(connect.reload());
 });
 
@@ -54,7 +51,6 @@ gulp.task('sass', function () {
     .src('style/**/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('dist/css/'))
-    .pipe(livereload())
     .pipe(connect.reload());
 });
 
@@ -68,25 +64,31 @@ gulp.task('cssmin', ['sass'], function () {
     .pipe(cssmin())
     .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest('dist/css/'))
-    .pipe(livereload())
     .pipe(connect.reload());
 });
 
 // 6.处理js文件
 // 合并文件 压缩js文件
 const concat = require('gulp-concat');
+const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
 
 gulp.task('js', function () {
-  return gulp
-    .src('js/*.js')
-    .pipe(concat('index.js'))
-    .pipe(gulp.dest('dist/js/'))
-    .pipe(uglify())
-    .pipe(rename('index.min.js'))
-    .pipe(gulp.dest('dist/js/'))
-    .pipe(livereload())
-    .pipe(connect.reload());
+  return (
+    gulp
+      .src('js/*.js')
+      .pipe(
+        babel({
+          presets: ['@babel/env']
+        })
+      )
+      .pipe(concat('index.js'))
+      .pipe(gulp.dest('dist/js/'))
+      // .pipe(uglify())
+      .pipe(rename('index.min.js'))
+      .pipe(gulp.dest('dist/js/'))
+      .pipe(connect.reload())
+  );
 });
 
 
@@ -110,7 +112,6 @@ gulp.task(
         )
       )
       .pipe(gulp.dest('./dist/'))
-      .pipe(livereload())
       .pipe(connect.reload());
   }
 )
@@ -130,26 +131,12 @@ gulp.task(
 )
 
 // default 默认任务
-gulp.task('build', ['default', 'clean'], function () {
+gulp.task('build', ['clean', 'default'], function () {
   console.info('build done!')
 });
 
 // 8.任务监听
-// 文件改变，会自动执行任务
-const livereload = require('gulp-livereload');
-gulp.task('watch', ['inject'], function () {
-  // 开启监听
-  livereload.listen()
-  // 确认监听目标及绑定相应任务
-  gulp.watch('index.html', ['html'])
-  gulp.watch('style/**/*.scss', ['sass', 'cssmin'])
-  gulp.watch('img/**/*', ['images']);
-  gulp.watch(['json/*.json', 'xml/*.xml', '!xml/old.xml'], ['data']);
-  gulp.watch('js/*.js', ['js'])
-  // 注意：需要在各个子任务中添加livereload配合
-})
-
-// 9.启动服务器
+// 启动服务器
 const connect = require('gulp-connect');
 const open = require('open');
 gulp.task('server', ['default'], function () {
