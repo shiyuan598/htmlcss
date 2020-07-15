@@ -8,7 +8,7 @@ console.info(user)
 
 for (const key in user) {
   if (user.hasOwnProperty(key)) {
-    const value = user[key];
+    const value = user[key]
     console.info(key + ': ' + value)
   }
 }
@@ -17,7 +17,7 @@ const arr = ['xcyh', 'xcli', 'xcvu']
 
 for (const key in arr) {
   if (arr.hasOwnProperty(key)) {
-    const value = arr[key];
+    const value = arr[key]
     console.info(key + ': ' + value)
   }
 }

@@ -1,3 +1,3 @@
-function show(params) {
+function show (params) {
   console.info(params)
 }
