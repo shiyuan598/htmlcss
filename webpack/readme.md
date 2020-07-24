@@ -51,7 +51,7 @@
   5. vue-loader
 ###3.样式处理
   1.分离样式文件
-    专门用于提取样式到CSS文件的插件：
+    专门用于提取样式到CSS文件的插件(不然是和js混在一个文件里面的)：
     **mini-css-extract-plugin**用于webpack4.0及以上
     **extract-text-webpack-plugin**用于webpack4.0以下
   2.样式预处理
@@ -95,3 +95,15 @@
       ]
     }`
 ###4.代码分片code splitting
+  **CommonsChunkPlugin**用于webpack4.0以前的版本
+
+###5.生产环境配置
+  1.环境配置
+  2.sourcemap
+  3.资源压缩
+  压缩javascript:
+    webpack3集成了**uglifyJS**,webpack4集成了**terser**插件
+  压缩css:
+    前提是已经使用分离插件把css提取到了单独的文件中
+    使用**optimize-css-assets-webpack-plugin**压缩css，该插件的压缩器为cssnano
+
