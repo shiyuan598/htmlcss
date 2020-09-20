@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+    .container{
+      border: 2px solid #00ceeb;;
+      font-size: 60px;
+      width: 660px;
+    }
+    img{
+      vertical-align: bottom;
+      vertical-align: middle;
+      /* width: 150px; */
+    }
+    .content{
+      position: relative;
+      margin: 20px;
+      width: 400px;
+      /* height: 400px; */
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-size: 20px;
+      color: #333;
+    }
+    .clearfix::after{
+      display: block;
+      height: 0;
+      content: "";
+      visibility: hidden;
+      clear: both;
+    }
+    .img-left{
+      display: block;
+      float: left;
+    }
+    .img-right{
+      position: absolute;
+      right: 0;
+      top: 0;
+      border:0;
+    }
+    .img-bottom{
+      width: 250px;
+    }
+    .float{
+      float: left;
+      width: 100px;
+      height: 100px;
+      background-color: #87ceeb;
+      color: #fff;
+      text-align: center;
+      line-height: 100px;
+    }
+    .position{
+      position: absolute;
+      right: 0;
+      top: 48px;
+      width: 180px;
+      height: 30px;
+      background-color: #23ebbe;
+      color: #fff;
+      text-align: center;
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596876181430&di=d981961c55cf13a19f5c1ada20c476bc&imgtype=0&src=http%3A%2F%2F00.minipic.eastday.com%2F20170420%2F20170420105628_ea6da92abc46098d8e03ad2ee55abeb7_9.jpeg" alt="">
+  <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596876254145&di=0e5758cbcdf221f6d98747e431b99016&imgtype=0&src=http%3A%2F%2F00.minipic.eastday.com%2F20170511%2F20170511174026_ce78ab94ee63acbcb6990ae044b62b32_12.jpeg" alt="">
+  <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596876328973&di=bdebf6f959bdd28e4c7cde6f1773a775&imgtype=0&src=http%3A%2F%2F00.minipic.eastday.com%2F20170206%2F20170206161841_fd7d116e9b5f04fc5fa0b60810d6f22d_5.jpeg" alt="">
+  <div class="container">
+    <img src="./01.png" alt="">
+    <span>嗨！Love you!</span>
+  </div>
+  <div class="content clearfix">
+    <div class="float">float</div>
+    <div class="position">absolute</div>
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum, aut.
+    <img class='img-left' src="./6.png" alt="">
+    <!-- <img class='img-bottom' src="./7.png" alt=""> -->
+    <!-- <img class='img-right' src="./8.png" alt=""> -->
+  </div>
+</body>
+</html>

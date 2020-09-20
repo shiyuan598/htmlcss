@@ -32,8 +32,8 @@ transfrom不会影响其他盒子 */
   width: 100px;
   height: 100px;
   background-color: #87ceeb;
-  /* transform: translate(50%, 50%); */
-  transform: rotate(45deg);
+  transform: translate(50%, 50%) scale(2) rotate(60deg);
+  /* transform: rotate(45deg); */
   /* transform: scale(1.2); */
 }
 

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 声明清除浮动的样式 */
+    .clearfix::after{
+      content: "";
+      display: block;
+      height: 0;
+      visibility: hidden;
+      clear: both;
+    }
+    .clearfix{ /*兼容ie6、ie7*/
+      *zoom: 1;
+    }
+
+    /* 双伪元素法*/
+    .clearfix::before, .clearfix::after{
+      content: "";
+      display: table;
+    }
+    .clearfix::after{
+      clear: both;
+    }
+    .clearfix{ /*兼容ie6、ie7*/
+      *zoom: 1;
+    }
+
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    .container{
+      /* height: 250px; */
+      width: 500px;
+      background-color: #87ceeb;
+      margin: 10px;
+      border:#87ceeb 5px solid;
+      /* overflow: hidden; */
+    }
+    .content{
+      height: 200px;
+      width: 400px;
+      /* margin: auto; */
+      margin-top: 20px;
+      background-color: #0094ff;
+      /* text-align: center; */
+      /* line-height: 200px; */
+      /* vertical-align: middle; */
+    }
+    img{
+      width: 200px;
+    }
+    .top, .bottom{
+      width: 150px;
+      height: 100px;
+      text-align: center;
+      line-height: 100px;
+      background-color: #ceeb56;
+      /* margin: auto; */
+    }
+    .top{
+      float: left;
+      margin: 10px;
+    }
+    .bottom{
+      float: right;
+      /* margin-top: 30px; */
+      height: 120px;
+      width: 240px;
+      background-color: #ffceeb;
+    }
+    /* .clear {
+      clear: both;
+    } */
+  </style>
+</head>
+<body>
+  <div class="container clearfix">
+    <div class="content">
+      <img src="./02.jpg" alt="">
+      <span>xcvu</span>
+      content</div>
+    <div class="top">top</div>
+    <div class="bottom">bottom</div>
+  </div>
+</body>
+</html>
