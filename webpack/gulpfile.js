@@ -14,10 +14,10 @@ gulp.task('clean', function (cb) {
 const htmlmin = require('gulp-htmlmin')
 gulp.task('html', function () {
   return gulp
-    .src('./src/index.html')
+    .src('./index.html')
     .pipe(
       htmlmin({
-        // collapseWhitespace: true, // 去掉空格
+        collapseWhitespace: true, // 去掉空格
         removeAttributeQuotes: true // 删除属性的引号
       })
     )
@@ -147,7 +147,7 @@ gulp.task('server', ['default'], function () {
   open('http://localhost:9001/')
 
   // 监听文件
-  gulp.watch('./src/index.html', ['html'])
+  gulp.watch('./index.html', ['html'])
   gulp.watch('./src/style/**/*.scss', ['sass', 'cssmin'])
   gulp.watch('./src/img/**/*', ['images'])
   gulp.watch(['./src/json/*.json', './src/xml/*.xml', '!./src/xml/old.xml'], ['data'])

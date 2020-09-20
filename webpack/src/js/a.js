@@ -1,3 +1,5 @@
+import vue from './vue';
+console.info(vue.version)
 var user = {
   name: 'xcvu',
   age: 27,
@@ -8,7 +10,7 @@ console.info(user)
 
 for (const key in user) {
   if (user.hasOwnProperty(key)) {
-    const value = user[key];
+    const value = user[key]
     console.info(key + ': ' + value)
   }
 }
@@ -17,7 +19,7 @@ const arr = ['xcyh', 'xcli', 'xcvu']
 
 for (const key in arr) {
   if (arr.hasOwnProperty(key)) {
-    const value = arr[key];
+    const value = arr[key]
     console.info(key + ': ' + value)
   }
 }
@@ -33,3 +35,6 @@ const newArr = arr.map(function (item) {
   return item + ' haha'
 })
 console.table(newArr)
+
+// node 的commonjs模块 需要使用require导入
+module.exports = user

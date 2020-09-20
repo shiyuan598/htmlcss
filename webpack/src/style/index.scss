@@ -1,0 +1,36 @@
+$width: 200px;
+
+:root{
+  --highlightColor: hwb(190, 35%, 20%);
+}
+
+body{
+  color: var(--highlightColor);
+}
+
+.div {
+  box-sizing: border-box;
+  width: $width;
+  height: 200px;
+  background-color: #ffceeb;
+  border: solid 1px #a50;
+  padding: 20px;
+}
+
+#container{
+  display: flex;
+  background-color: #87ceeb;
+  width: 600px;
+  margin: 0 auto;
+  #text{
+    padding: 10px;
+    font-size: larger;
+    font-weight: 700;
+    color: #fff;
+  }
+}
+
+a{
+  color: #ffceeb;
+  transition: transform 1s;
+}

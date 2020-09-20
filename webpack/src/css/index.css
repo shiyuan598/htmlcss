@@ -1,0 +1,17 @@
+.div {
+  box-sizing: border-box;
+  width: 200px;
+  height: 200px;
+  background-color: #ffceeb;
+  border: solid 1px #a50;
+  padding: 20px; }
+
+#container {
+  background-color: #87ceeb;
+  width: 600px;
+  margin: 0 auto; }
+  #container #text {
+    padding: 10px;
+    font-size: larger;
+    font-weight: 700;
+    color: #fff; }
