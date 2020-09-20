@@ -13,9 +13,8 @@
       <div>
         <div class="header">
           <div class="layout-nav">
-            <MenuItem class="category-item" :class="currentItem==index ? 'category-item-current' : ''" :key="item.name"
-                      v-for="(item, index) in catagory" :name="index">
-              {{item.name}}
+            <MenuItem class="category-item" :class="currentItem==index ? 'category-item-current' : ''" :key="item.name" v-for="(item, index) in catagory" :name="index">
+            {{item.name}}
             </MenuItem>
           </div>
         </div>
@@ -37,7 +36,7 @@ import TabsItem from '@/components/TabsItem'
 
 export default {
   name: 'Home',
-  components: {OverView, CategoryItem, TabsItem},
+  components: { OverView, CategoryItem, TabsItem },
   data () {
     return {
       currentItem: 0,
@@ -316,7 +315,8 @@ export default {
   padding: 0;
   border: 0;
   width: 100%;
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
 
 .container {
