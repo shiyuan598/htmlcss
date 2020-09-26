@@ -14,9 +14,9 @@
 
 <script>
 export default {
-  name: 'TabsItem',
-  props: ['tabsList']
-}
+  name: "TabsItem",
+  props: ["tabsList"]
+};
 </script>
 
 <style scoped>

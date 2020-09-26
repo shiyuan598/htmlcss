@@ -17,45 +17,45 @@
 
 <script>
 export default {
-  name: 'CategoryItem',
-  props: ['category'],
-  data () {
+  name: "CategoryItem",
+  props: ["category"],
+  data() {
     return {
-      title: '手机壁纸',
+      title: "手机壁纸",
       imgList: [
         {
-          name: '插画中的美女',
-          src: './static/images/1_10060612251102.jpg'
+          name: "插画中的美女",
+          src: "./static/images/1_10060612251102.jpg"
         },
         {
-          name: '手机壁纸收藏',
-          src: './static/images/1_1006061034TU.jpg'
+          name: "手机壁纸收藏",
+          src: "./static/images/1_1006061034TU.jpg"
         },
         {
-          name: '怡然美景美不胜收壁纸欣赏',
-          src: './static/images/1_10060609459629.jpg'
+          name: "怡然美景美不胜收壁纸欣赏",
+          src: "./static/images/1_10060609459629.jpg"
         },
         {
-          name: '沙漠掠影高清图片下载',
-          src: './static/images/1_1006060R613O.jpg'
+          name: "沙漠掠影高清图片下载",
+          src: "./static/images/1_1006060R613O.jpg"
         },
         {
-          name: '山河美色iphone plus壁纸',
-          src: './static/images/1_1006060I0DH.jpg'
+          name: "山河美色iphone plus壁纸",
+          src: "./static/images/1_1006060I0DH.jpg"
         }
       ]
-    }
+    };
   },
-  created () {
+  created() {
     if (this.$route.params.category) {
-      this.title = this.$route.params.category.title
-      this.imgList = this.$route.params.category.imgList
+      this.title = this.$route.params.category.title;
+      this.imgList = this.$route.params.category.imgList;
     } else if (this.category) {
-      this.title = this.category.title
-      this.imgList = this.category.imgList
+      this.title = this.category.title;
+      this.imgList = this.category.imgList;
     }
   }
-}
+};
 </script>
 
 <style scoped>

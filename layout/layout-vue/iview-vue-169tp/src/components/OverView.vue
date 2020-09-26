@@ -135,13 +135,13 @@
 
 <script>
 export default {
-  name: 'OverView',
-  data () {
+  name: "OverView",
+  data() {
     return {
       speed: 4000
-    }
+    };
   }
-}
+};
 </script>
 
 <style scoped>
