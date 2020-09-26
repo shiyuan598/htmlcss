@@ -17,12 +17,12 @@ export default new Router({
       component: HelloWorld
     },
     {
-      path: '/',
+      path: '/Home',
       name: 'Home',
       component: Home
     },
     {
-      path: '/Subject',
+      path: '/',
       name: 'Subject',
       component: Subject,
       children: [

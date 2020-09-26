@@ -2,28 +2,40 @@
   <div class="container">
     <div class="title">
       <div class="logo">
-        <img class="logo-img" src="../../static/images/logo.gif" alt="">
+        <img class="logo-img" src="../../static/images/logo.gif" alt="" />
       </div>
       <div class="title-info">
         <a href="javascript:;">加入收藏</a>
-        <a href="javascript:;">联系我们</a>
+        <a href="javascript:;" @click.prevent="gotoSubject">联系我们</a>
       </div>
     </div>
     <div class="layout">
       <div>
         <div class="header">
           <div class="layout-nav">
-            <MenuItem class="category-item" :class="currentItem==index ? 'category-item-current' : ''" :key="item.name" v-for="(item, index) in catagory" :name="index">
-            {{item.name}}
+            <MenuItem
+              class="category-item"
+              :class="currentItem == index ? 'category-item-current' : ''"
+              :key="item.name"
+              v-for="(item, index) in catagory"
+              :name="index"
+            >
+              {{ item.name }}
             </MenuItem>
           </div>
         </div>
         <div class="content">
           <OverView></OverView>
-          <CategoryItem :key="item.title" :category="item" v-for="item in categoryDetails"></CategoryItem>
+          <CategoryItem
+            :key="item.title"
+            :category="item"
+            v-for="item in categoryDetails"
+          ></CategoryItem>
           <TabsItem :tabs-list="tabsList"></TabsItem>
         </div>
-        <div class="footer">Copyright © 2007-2019 169美女图片网 皖ICP备17023633号-1</div>
+        <div class="footer">
+          Copyright © 2007-2019 169美女图片网 皖ICP备17023633号-1
+        </div>
       </div>
     </div>
   </div>
@@ -305,6 +317,15 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    gotoSubject () {
+      this.$router.push('/')
+    }
+  },
+  mounted () {
+    let t = this.$route.query.t
+    console.info('params:' + t)
   }
 }
 </script>

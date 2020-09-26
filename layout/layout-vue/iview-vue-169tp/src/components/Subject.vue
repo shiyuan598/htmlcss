@@ -1,8 +1,16 @@
 <template>
   <div class="container">
+    <button @click="home">首页</button>
     <div class="left">
       <ul>
-        <li :class="currentTopic === index ? 'current' : ''" :key="index" v-for="(topic, index) in topicList" @click="topicClick(topic, index)">{{topic.name}}</li>
+        <li
+          :class="currentTopic === index ? 'current' : ''"
+          :key="index"
+          v-for="(topic, index) in topicList"
+          @click="topicClick(topic, index)"
+        >
+          {{ topic.name }}
+        </li>
       </ul>
     </div>
     <div id="content">
@@ -232,7 +240,7 @@ export default {
     }
   },
   mounted () {
-    eventBus.$on('topic', (category) => {
+    eventBus.$on('topic', category => {
       for (let index = 0; index < this.topicList.length; index++) {
         const item = this.topicList[index]
         if (item.name === category.title) {
@@ -243,16 +251,33 @@ export default {
     })
   },
   methods: {
+    home () {
+      this.$router.push('/Home')
+    },
     topicClick (topic, index) {
       this.currentTopic = index
       if (index === 0) {
         // this.$router.push('/Subject/OverView')
-        this.$router.push({ name: 'OverView', params: { userId: 123 }, query: { t: Date.now() } })
+        this.$router.push({
+          name: 'OverView',
+          params: { userId: 123 },
+          query: { t: Date.now() }
+        })
       } else if (index === 1) {
-        this.$router.push({ name: 'TabsItem', params: { index: 2 }, query: { t: Date.now() } })
+        this.$router.push({
+          name: 'TabsItem',
+          params: { index: 2 },
+          query: { t: Date.now() }
+        })
       } else {
-        let category = this.categoryDetails.filter(item => item.title === topic.name)[0]
-        this.$router.push({ name: 'CategoryItem', params: { category }, query: { t: Date.now() } })
+        let category = this.categoryDetails.filter(
+          item => item.title === topic.name
+        )[0]
+        this.$router.push({
+          name: 'CategoryItem',
+          params: { category },
+          query: { t: Date.now() }
+        })
       }
     }
   }

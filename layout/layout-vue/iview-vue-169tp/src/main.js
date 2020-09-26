@@ -6,6 +6,8 @@ import router from './router'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 
+// window.location
+console.info(window.location.href)
 Vue.config.productionTip = false
 Vue.use(iView)
 /* eslint-disable no-new */

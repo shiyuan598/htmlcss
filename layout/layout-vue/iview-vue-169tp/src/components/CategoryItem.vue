@@ -1,15 +1,15 @@
 <template>
   <div class="container">
     <div class="title">
-      <div class="title-text">{{title}}</div>
-      <div class="title-more">更多{{title}}&gt;&gt;</div>
+      <div class="title-text">{{ title }}</div>
+      <div class="title-more">更多{{ title }}&gt;&gt;</div>
     </div>
     <div class="img-container">
       <div :key="item.name" class="img-list" v-for="item in imgList">
         <div class="img">
-          <img :src="item.src" :alt="item.name">
+          <img :src="item.src" :alt="item.name" />
         </div>
-        <div class="info">{{item.name}}</div>
+        <div class="info">{{ item.name }}</div>
       </div>
     </div>
   </div>

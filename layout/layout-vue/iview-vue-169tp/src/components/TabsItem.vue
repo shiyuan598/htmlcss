@@ -4,7 +4,7 @@
       <TabPane :key="item.name" v-for="item in tabsList" :label="item.name">
         <div class="tab-content">
           <a :key="data.name" :href="data.href" v-for="data in item.content">
-            {{data.name}}
+            {{ data.name }}
           </a>
         </div>
       </TabPane>
